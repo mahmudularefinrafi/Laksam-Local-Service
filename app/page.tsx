@@ -1,14 +1,9 @@
+import Link from "next/link";
+
 const categories = [
-  ["⚡", "Electrician", "12 providers"],
-  ["🔧", "Plumber", "9 providers"],
-  ["❄️", "AC Technician", "8 providers"],
-  ["📱", "Mobile Repair", "15 providers"],
-  ["💻", "Laptop Repair", "6 providers"],
-  ["🧹", "Cleaner", "11 providers"],
-  ["🪚", "Carpenter", "7 providers"],
-  ["🎓", "Tutor", "18 providers"],
-  ["📷", "Photographer", "5 providers"],
-  ["🚗", "Driver", "10 providers"],
+  ["⚡", "Electrician", "12 providers"], ["🔧", "Plumber", "9 providers"], ["❄️", "AC Technician", "8 providers"],
+  ["📱", "Mobile Repair", "15 providers"], ["💻", "Laptop Repair", "6 providers"], ["🧹", "Cleaner", "11 providers"],
+  ["🪚", "Carpenter", "7 providers"], ["🎓", "Tutor", "18 providers"], ["📷", "Photographer", "5 providers"], ["🚗", "Driver", "10 providers"],
 ];
 
 const providers = [
@@ -18,89 +13,36 @@ const providers = [
 ];
 
 export default function Home() {
-  return (
-    <main>
-      <header className="header">
-        <div className="container nav">
-          <a className="logo" href="#">
-            <span className="logo-mark">L</span>
-            Laksam Local Service
-          </a>
-          <nav className="nav-links">
-            <a href="#services">Services</a>
-            <a href="#providers">Providers</a>
-            <a href="#how">How it works</a>
-          </nav>
-          <a className="nav-cta" href="#provider">Become a Provider</a>
-        </div>
-      </header>
+  return <main className="premium-home">
+    <header className="premium-nav">
+      <Link href="/" className="premium-brand"><span className="premium-brand-mark">L</span> Laksam Local Service</Link>
+      <nav className="premium-navlinks"><Link href="/services">Services</Link><Link href="/providers">Providers</Link><a href="#how">How it works</a></nav>
+      <div className="premium-actions"><Link href="/login" className="premium-login">Sign in</Link><Link href="/register" className="premium-cta">Become a Provider</Link></div>
+    </header>
 
-      <section className="hero">
-        <div className="container hero-grid">
-          <div>
-            <div className="eyebrow">Trusted services in Laksam</div>
-            <h1>Find the right local service, right when you need it.</h1>
-            <p className="hero-copy">From a broken AC to a leaking tap, discover trusted service providers around Laksam with ratings, estimated prices and easy booking.</p>
-            <div className="search-box">
-              <input aria-label="Search for a service" placeholder="What service do you need? e.g. AC repair" />
-              <button className="search-btn">Search</button>
-            </div>
-          </div>
+    <section className="premium-hero"><div className="premium-container premium-hero-grid">
+      <div>
+        <div className="premium-badge"><span className="premium-dot"/> Trusted local services in Laksam</div>
+        <h1 className="premium-title">The right service.<br/><span>Right around you.</span></h1>
+        <p className="premium-copy">Find trusted professionals for your everyday needs — with ratings, transparent starting prices and easy booking.</p>
+        <div className="premium-search"><input placeholder="What service do you need?  e.g. AC repair" aria-label="Search service"/><Link href="/providers" className="premium-search-btn"><button>Search</button></Link></div>
+        <div className="premium-trust"><div className="trust-avatars"><span>RA</span><span>KS</span><span>MH</span></div><span>Trusted by people around Laksam</span></div>
+      </div>
+      <div className="premium-hero-card">
+        <div className="premium-card-top"><strong>Popular near you</strong><span className="premium-location">● Laksam</span></div>
+        {providers.map(p=><Link href="/providers/rahim-electric-service" className="premium-provider" key={p.name}><div className="premium-avatar">{p.initials}</div><div className="premium-provider-info"><strong>{p.name}</strong><small>{p.service} · {p.area}</small><span className="premium-verified">✓ Verified provider</span></div><span className="premium-rating">★ {p.rating}</span></Link>)}
+      </div>
+    </div></section>
 
-          <div className="hero-card">
-            <div className="card-head">
-              <span className="card-title">Popular near you</span>
-              <span className="live">Laksam</span>
-            </div>
-            {providers.map((provider) => (
-              <div className="provider" key={provider.name}>
-                <div className="avatar">{provider.initials}</div>
-                <div className="provider-main">
-                  <div className="provider-name">{provider.name}</div>
-                  <div className="provider-meta">{provider.service} · {provider.area}</div>
-                </div>
-                <div className="rating">★ {provider.rating}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <section className="premium-section"><div className="premium-container"><div className="premium-section-head"><div><h2>What do you need?</h2><p>From home repairs to personal services, find someone reliable nearby.</p></div><Link href="/services" className="premium-link">View all services →</Link></div>
+      <div className="premium-category-grid">{categories.map(([icon,name,count])=><Link href="/providers" className="premium-category" key={name}><div className="premium-category-icon">{icon}</div><strong>{name}</strong><small>{count}</small></Link>)}</div>
+    </div></section>
 
-      <section className="section" id="services">
-        <div className="container">
-          <div className="section-head">
-            <div>
-              <h2>What do you need?</h2>
-              <p className="section-sub">Find a trusted provider for everyday needs in Laksam.</p>
-            </div>
-          </div>
-          <div className="categories">
-            {categories.map(([icon, name, count]) => (
-              <a className="category" href="#providers" key={name}>
-                <div className="category-icon">{icon}</div>
-                <div className="category-name">{name}</div>
-                <div className="category-count">{count}</div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+    <section className="premium-section premium-dark" id="how"><div className="premium-container"><div className="premium-section-head"><div><h2>Simple from start to finish.</h2><p>Search, compare and book — without the usual hassle.</p></div></div>
+      <div className="premium-steps"><div className="premium-step"><span className="premium-step-number">01 / SEARCH</span><h3>Tell us what you need</h3><p>Choose a service and your area in Laksam to see relevant professionals.</p></div><div className="premium-step"><span className="premium-step-number">02 / CHOOSE</span><h3>Compare with confidence</h3><p>See verification, experience, ratings and starting prices before you decide.</p></div><div className="premium-step"><span className="premium-step-number">03 / BOOK</span><h3>Get the job done</h3><p>Send a booking request or contact the provider directly at your convenience.</p></div></div>
+    </div></section>
 
-      <section className="section how" id="how">
-        <div className="container">
-          <h2>Simple from start to finish.</h2>
-          <p className="section-sub">No complicated process. Search, choose and get the job done.</p>
-          <div className="steps">
-            <div className="step"><div className="step-no">01</div><h3>Search</h3><p>Choose the service you need and your area in Laksam.</p></div>
-            <div className="step"><div className="step-no">02</div><h3>Choose</h3><p>Compare verified providers, ratings, experience and estimated price.</p></div>
-            <div className="step"><div className="step-no">03</div><h3>Book</h3><p>Call, WhatsApp or send a booking request at your convenient time.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <footer className="footer">
-        <div className="container">© 2026 Laksam Local Service · Built for Laksam</div>
-      </footer>
-    </main>
-  );
+    <section className="premium-section premium-provider-section"><div className="premium-container"><div className="premium-provider-banner"><div><h2>Are you a local service professional?</h2><p>Join Laksam Local Service, build your profile and reach customers looking for your skills.</p></div><Link href="/register" className="premium-white-btn">Join as a Provider →</Link></div></div></section>
+    <footer className="premium-footer"><div className="premium-container premium-footer-inner"><strong>© 2026 Laksam Local Service</strong><span>Built for Laksam · Trusted locally</span></div></footer>
+  </main>;
 }
