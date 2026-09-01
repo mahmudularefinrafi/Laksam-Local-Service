@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./premium.css";
+import "./modern.css";
 
 export const metadata: Metadata = {
   title: "Laksam Local Service | Trusted Services in Laksam",
@@ -8,9 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+  return <html lang="bn"><body>{children}</body></html>;
 }
